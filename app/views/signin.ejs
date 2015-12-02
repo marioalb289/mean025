@@ -2,28 +2,44 @@
 <html>
 <head>
   <!-- Usa la propiedad 'title' para renderizar un título de página  -->
+  <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" type="text/css" href="/lib/angular-material/angular-material.min.css">
+  <link rel="stylesheet" type="text/css" href="/example/styles/styles.css">
+  <script type="text/javascript" src="/lib/jquery/dist/jquery.min.js"></script>
   <title><%= title %></title>
 </head>
 <body>
+   <div class="page-header">
+      
+  </div>
     <!-- Mostrar mensajes Flash  -->
-  <% for(var i in messages) { %>
-     <div class="flash"><%= messages[i] %></div>
-  <% } %>
+ 
 
   <!-- Renderizar el formulario signin -->
-  <form action="/signin" method="post">
-    <div>
-      <label>Usuario:</label>
-      <input type="text" name="username" />
+  <div id="" class="container main col-xs-offset-2 col-xs-8 col-md-offset-4 col-md-4">
+      <form name="userForm" class="signin" action="/signin" method="post" novalidate autocomplete="off">
+        <fieldset>
+          <div class="form-group" show-errors>
+            <label for="username" >Username</label>
+            <input type="text" id="username" name="username" class="form-control" ng-model="usuario.user"  placeholder="Username" lowercase required>
+          </div>
+          <div class="form-group" show-errors>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" class="form-control" ng-model="usuario.password" placeholder="Password" required>
+          </div>
+          <div class="text-center form-group">
+          <% for(var i in messages) { %>
+             <div class="alert alert-danger"><%= messages[i] %></div>
+          <% } %>
+            <input type="submit" class="btn btn-success btn-sm" value="Sign In" />
+          </div>
+          <!-- <div class="text-center forgot-password">
+            <a ui-sref="register">Registrar Usuario</a>
+          </div> -->
+        </fieldset>
+      </form>
     </div>
-    <div>
-      <label>Contraseña:</label>
-      <input type="password" name="password" />
-    </div>
-    <div>
-      <input type="submit" value="Identificarse" />
-    </div>
-  </form>
-   <a href="/oauth/google">Identificarse usando Google</a>
+    <script type="text/javascript" src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
