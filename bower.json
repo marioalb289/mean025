@@ -1,0 +1,15 @@
+{
+  "name": "MEAN",
+  "version": "0.0.7",
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "bootstrap": "~3.3.6",
+    "angular": "~1.4.8",
+    "angular-ui-router": "~0.2.15",
+    "angular-animate": "~1.4.8",
+    "angular-aria": "~1.4.8",
+    "angular-material": "~0.11.4",
+    "angular-resource": "~1.4.8",
+    "angular-route": "~1.4.8"
+  }
+}
