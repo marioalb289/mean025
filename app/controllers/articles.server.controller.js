@@ -87,6 +87,7 @@ exports.update = function(req, res) {
 exports.delete = function(req, res) {
 	// Obtener el artículo usando el objeto 'request'
 	var article = req.article;
+	console.log(article);
 
 	// Usar el método model 'remove' para borrar el artículo
 	article.remove(function(err) {

@@ -16,3 +16,11 @@
 
   .inputdemoBasicUsage .md-datepicker-button {
   width: 36px; }
+
+
+  /*Estilos listas*/
+  .edit-list{
+      cursor: pointer;
+      margin-left: 10px;
+  }
+  /******/

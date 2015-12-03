@@ -16,8 +16,8 @@ module.exports = function(app) {
 	app.route('/api/tareas/:tareaId')
 	   .get(tareas.read)
 	   .put(users.requiresLogin, tareas.hasAuthorization, tareas.update)
-	   .delete(users.requiresLogin, tarea.hasAuthorization, tareas.delete);
+	   .delete(users.requiresLogin, tareas.hasAuthorization, tareas.delete);
 
 	// Configurar el parámetro middleware 'articleId'   
-	app.param('tareaId', tareas.articleByID);
+	app.param('tareaId', tareas.tareaByID);
 };

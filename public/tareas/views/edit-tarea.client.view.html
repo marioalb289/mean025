@@ -1,5 +1,5 @@
 
-<div ng-controller="TareasController" class="container main col-xs-offset-2 col-xs-8 col-md-offset-2 col-md-8" layout="column" ng-cloak>
+<div ng-controller="TareasController" data-ng-init="findOne()" class="container main col-xs-offset-2 col-xs-8 col-md-offset-2 col-md-8" layout="column" ng-cloak>
   <h1>Aregar Tarea</h1>
   <md-content layout-padding>
     <form name="projectForm">
@@ -11,8 +11,8 @@
           <div ng-message="md-maxlength">Titulo debe ser menor de 30 caracteres</div>
         </div>
       </md-input-container>
-      <h4>Disabled date-picker</h4>
-      <md-datepicker ng-model="myDate" md-placeholder="Enter date" ng-model="myDate" disabled></md-datepicker>
+      <h4>{{tarea.creado | date:'dd-MM-yyyy'}}</h4>
+      <md-datepicker ng-model="tarea.creado" md-placeholder="Enter date" disabled></md-datepicker>
       <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
         <md-button class="md-raised md-primary" ng-click="create()">Primary</md-button>
         <!-- <div class="label">Raised</div> -->

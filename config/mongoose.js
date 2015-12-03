@@ -17,8 +17,8 @@ module.exports = function() {
 	require('../app/models/article.server.model');
 
 	require('../app/models/tarea.server.model');
-	require('../app/models/tarea_desc.server.model');
-	require('../app/models/user_tarea.server.model');
+	// require('../app/models/tarea_desc.server.model');
+	// require('../app/models/user_tarea.server.model');
 
 
 	// Devolver la instancia de conexión a Mongoose
