@@ -42,6 +42,7 @@ exports.create = function(req, res) {
 exports.list = function(req, res) {
 	// Usar el método model 'find' para obtener una lista de artículos
 	Article.find().sort('-creado').populate('creador', 'firstName lastName fullName').exec(function(err, articles) {
+		// console.log(articles);
 		if (err) {
 			// Si un error ocurre enviar un mensaje de error
 			return res.status(400).send({

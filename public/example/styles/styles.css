@@ -11,3 +11,8 @@
 .navbar{
 	position: relative;
 }
+.inputdemoErrors .inputErrorsApp {
+  min-height: 48px; }
+
+  .inputdemoBasicUsage .md-datepicker-button {
+  width: 36px; }

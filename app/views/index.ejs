@@ -26,18 +26,14 @@
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav">
-	        <li ><a ui-sref="alta" >Tareas <span class="sr-only"></span></a></li>
-	        <li><a href="#">Link</a></li>
 	        <li class="dropdown">
-	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tareas <span class="caret"></span></a>
 	          <ul class="dropdown-menu">
-	            <li><a href="#">Action</a></li>
-	            <li><a href="#">Another action</a></li>
-	            <li><a href="#">Something else here</a></li>
+	            <li><a href="/#!/tareas/create">Crear</a></li>
+	            <li><a href="#">Listar</a></li>
 	            <li role="separator" class="divider"></li>
-	            <li><a href="#">Separated link</a></li>
-	            <li role="separator" class="divider"></li>
-	            <li><a href="#">One more separated link</a></li>
+	            <li><a href="#">Editar</a></li>
+	            <li><a href="#">Eliminar</a></li>
 	          </ul>
 	        </li>
 	      </ul>
@@ -57,7 +53,6 @@
 	</nav>
 	<section ng-view></section>
 	<!-- footer -->
-	<nav class="navbar navbar-default navbar-fixed-bottom">
 	</nav>
 	<script type="text/javascript">
     window.user = <%- user || 'null' %>;
@@ -82,5 +77,10 @@
 	<script type="text/javascript" src="/users/users.client.module.js"></script>
     <script type="text/javascript" src="/users/services/authentication.client.service.js"></script>
 	<script type="text/javascript" src="/application.js"></script>
+	<!-- tareas script -->
+	<script type="text/javascript" src="/tareas/tareas.client.module.js"></script>
+	<script type="text/javascript" src="/tareas/controllers/tareas.client.controller.js"></script>
+    <script type="text/javascript" src="/tareas/services/tareas.client.service.js"></script>
+    <script type="text/javascript" src="/tareas/config/tareas.client.routes.js"></script>	
 </body>
 </html>
