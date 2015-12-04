@@ -1,5 +1,5 @@
 .main {
-    background-color: #f2f2f2;
+    /*background-color: #f2f2f2;*/
     border: 1px solid #ccc;
     padding: 20px;
     top: 20px;
@@ -24,3 +24,27 @@
       margin-left: 10px;
   }
   /******/
+
+
+/*BOTONES*/
+.buttondemoBasicUsage section {
+  background: #f7f7f7;
+  border-radius: 3px;
+  text-align: center;
+  margin: 1em;
+  position: relative !important;
+  padding-bottom: 10px; }
+.buttondemoBasicUsage md-content {
+  margin-right: 7px; }
+.buttondemoBasicUsage section .md-button {
+  margin-top: 16px;
+  margin-bottom: 16px; }
+.buttondemoBasicUsage .label {
+  position: absolute;
+  bottom: 5px;
+  left: 7px;
+  font-size: 14px;
+  opacity: 0.54; }
+
+  /**/
+

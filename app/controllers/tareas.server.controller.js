@@ -65,6 +65,12 @@ exports.update = function(req, res) {
 
 	// Actualizar los campos tarea
 	tarea.titulo = req.body.titulo;
+	tarea.descripcion = req.body.descripcion;
+	tarea.status = req.body.status;
+	if(tarea.status == 'Terminada'){
+		tarea.terminado = new Date();
+	}
+	tarea.terminadoCompromiso = req.body.terminadoCompromiso;
 
 	// Intentar salvar la tarea actualizada
 	tarea.save(function(err) {

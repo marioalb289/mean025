@@ -1,5 +1,6 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
+var tipos = 'En Espera,En proceso,En Pausa,Terminada,Cancelada'.split(',');
 
 var TareaSchema = new Schema({
   creado: {
@@ -11,6 +12,22 @@ var TareaSchema = new Schema({
     default: '',
     trim: true,
     required: 'El título no puede estar en blanco'
+  },
+  descripcion: {
+    type: String,
+    default: '',
+    trim: true,
+  },
+  terminado: {
+    type: Date,
+  },
+  terminadoCompromiso: {
+    type: Date,
+    required: 'Fecha Tentantiva obligatoria'
+  },
+  status:{
+    type: String,
+    enum: tipos
   },
   creador: {
     type: Schema.ObjectId,
