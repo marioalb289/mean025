@@ -1,22 +1,28 @@
 // Invocar modo JavaScript 'strict'
 'use strict';
 
-// Crear el controller 'articles'
-angular.module('tareas').controller('TareasController', ['$scope','$filter', '$routeParams', '$location','$mdDialog', '$mdMedia', 'Authentication', 'Tareas',
-    function($scope,$filter, $routeParams, $location,$mdMedia,$mdDialog, Authentication, Tareas) {
+// Crear el controller 'tareas'
+angular.module('tareas').controller('TareasController', ['$scope','$filter', '$routeParams', '$location','$mdDialog', 'Authentication', 'Api',
+    function($scope,$filter, $routeParams, $location,$mdDialog, Authentication,Api) {
         // Exponer el service Authentication
         $scope.authentication = Authentication;
         $scope.myDate = new Date();
+        $scope.users = null;
 
         $scope.states = ('En Espera,En proceso,En Pausa,Terminada,Cancelada').split(',').map(function(state) {
             return {abbrev: state};
           });
 
+        $scope.loadUsers = function() {
+            $scope.users = Api.Users.query();
+            console.log($scope.users);
+        };
+
         // Crear un nuevo método controller para crear nuevos articles
         $scope.create = function() {
             // Usar los campos form para crear un nuevo objeto $resource tarea
             console.log(this.tarea.titulo);
-            var tarea = new Tareas({
+            var tarea = new Api.Tareas({
                 titulo: this.tarea.titulo,
                 descripcion: this.tarea.descripcion,
                 terminadoCompromiso: this.tarea.terminadoCompromiso,
@@ -40,7 +46,7 @@ angular.module('tareas').controller('TareasController', ['$scope','$filter', '$r
         // Crear un nuevo método controller para recuperar una lista de tareas
         $scope.find = function() {
             // Usar el método 'query' de tarea para enviar una petición GET apropiada
-            $scope.tareas = Tareas.query();
+            $scope.tareas = Api.Tareas.query();
             console.log($scope.tareas);
         };
 
@@ -48,7 +54,7 @@ angular.module('tareas').controller('TareasController', ['$scope','$filter', '$r
         $scope.findOne = function() {
             // Usar el método 'get' de tarea para enviar una petición GET apropiada
             // $state.go('editar');
-            $scope.tarea = Tareas.get({
+            $scope.tarea = Api.Tareas.get({
                 tareaId: $routeParams.tareaId
             },function(_data){
                  _data.creado = new Date(_data.creado);
@@ -73,12 +79,12 @@ angular.module('tareas').controller('TareasController', ['$scope','$filter', '$r
         };
 
         // Crear un nuevo método controller para borrar una unica tarea
-        $scope.delete = function(tareamev) {
+        $scope.delete = function(tarea,ev) {
 
             // Appending dialog to document.body to cover sidenav in docs app
             var confirm = $mdDialog.confirm()
                   .title('¿ Eliminar Tarea ?')
-                  .textContent('Se eliminaran todos los datos relacionados a la tarea')
+                  .content('Se eliminaran todos los datos relacionados a la tarea')
                   .ariaLabel('Lucky day')
                   .targetEvent(ev)
                   .ok('Eliminar')
@@ -88,7 +94,7 @@ angular.module('tareas').controller('TareasController', ['$scope','$filter', '$r
                 //ok
                 // Si una tarea fue enviado al método, borrarlo
                 if (tarea) {
-                    // Usar el método '$remove' del artículo para borrar la tarea
+                    // Usar el método '$remove' del tarea para borrar la tarea
                     tarea.$remove(function() {
                         // Eliminar el artículo de la lista de artículos
                         for (var i in $scope.tareas) {
@@ -100,7 +106,7 @@ angular.module('tareas').controller('TareasController', ['$scope','$filter', '$r
                 } else {
                     // En otro caso, usar el método '$remove' de tarea para borrar la tarea
                     $scope.tarea.$remove(function() {
-                        $location.path('tareas/list');
+                        // $location.path('tareas/list');
                     });
                 }
             }, function() {
@@ -110,6 +116,7 @@ angular.module('tareas').controller('TareasController', ['$scope','$filter', '$r
 
             
         };
+
     }
 ]).config(function($mdThemingProvider) {
     // Configure a dark theme with primary foreground yellow

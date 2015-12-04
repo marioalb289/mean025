@@ -20,6 +20,20 @@ module.exports = function(app) {
        failureRedirect: '/signin',
        failureFlash: true
      }));
+
+  // Configurar la rutas base a 'usuarios' para el api  
+  app.route('/api/users')
+     .get(users.list)
+     .post(users.requiresLogin, users.create);
+  
+  // Configurar las rutas 'usuarios' parametrizadas para el api
+  app.route('/api/users/:userId')
+     .get(users.read)
+     .put(users.requiresLogin,users.update)
+     .delete(users.requiresLogin, users.delete);
+
+  // Configurar el parámetro middleware 'articleId'   
+  app.param('userId', users.userByID);
      
  // Configurar las rutas Google OAuth 
   app.get('/oauth/google', passport.authenticate('google', {

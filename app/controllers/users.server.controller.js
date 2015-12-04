@@ -33,6 +33,110 @@ var getErrorMessage = function(err) {
   return message;
 };
 
+// Crear un nuevo método controller que recupera una lista de usuarios
+exports.list = function(req, res) {
+  // Usar el método model 'find' para obtener una lista de usuarios
+  User.find().sort('-creado').exec(function(err, users) {
+    if (err) {
+      // Si un error ocurre enviar un mensaje de error
+      return res.status(400).send({
+        message: getErrorMessage(err)
+      });
+    } else {
+      // Enviar una representación JSON de usurios 
+      res.json(users);
+    }
+  });
+};
+// Crear un nuevo método controller que devuelve un usuario existente
+exports.read = function(req, res) {
+  res.json(req.user);
+};
+
+// Crear un nuevo método controller para crear nuevos USUARIOS
+exports.create = function(req, res, next) {
+    // Crear una nueva instancia del modelo 'User'
+    var user = new User(req.body);
+    var message = null;
+
+    // Configurar la propiedad user provider
+    user.provider = 'local';
+
+    // Intenta salvar el nuevo documento user
+    user.save(function(err) {
+      // Si ocurre un error, usa el mensaje flash para reportar el error
+      if (err) {
+        // Si ocurre algún error enviar el mensaje de error
+        return res.status(400).send({
+          message: getErrorMessage(err)
+        });
+      } else {
+        // Enviar una representación JSON del usuario 
+        res.json(user);
+      }
+    });
+};
+// Crear un nuevo método controller que actualiza un usuario existente
+exports.update = function(req, res) {
+  // Obtener la tarea usando el objeto 'request'
+  var user = req.user;
+
+  // Actualizar los campos usuario
+  user.firstName = req.body.nombre;
+  user.lastName =  req.body.apellido;
+  user.email =  req.body.emial;
+  user.username =  req.body.usuario;
+  user.password =  req.body.password;
+
+  // Intentar salvar la tarea actualizada
+  user.save(function(err) {
+    if (err) {
+      // si ocurre un error enviar el mensaje de error
+      return res.status(400).send({
+        message: getErrorMessage(err)
+      });
+    } else {
+      // Enviar una representación JSON del artículo 
+      res.json(user);
+    }
+  });
+};
+
+// Crear un nuevo controller middleware que recupera un único usuario existente
+exports.userByID = function(req, res, next, id) {
+  // Usar el método model 'findById' para encontrar una única tarea
+  User.findById(id).exec(function(err, user) {
+    if (err) return next(err);
+    if (!user) return next(new Error('Fallo al cargar el usuario ' + id));
+
+    // Si una tarea es encontrado usar el objeto 'request' para pasarlo al siguietne middleware
+    req.user = user;
+
+    // Llamar al siguiente middleware
+    next();
+  });
+};
+
+// Crear un nuevo método controller que borre un usuario existente
+exports.delete = function(req, res) {
+  // Obtener el artículo usando el objeto 'request'
+  var user = req.user;
+
+  // Usar el método model 'remove' para borrar la tarea
+  user.remove(function(err) {
+    if (err) {
+      // Si ocurre un error enviar el mensaje de error
+      return res.status(400).send({
+        message: getErrorMessage(err)
+      });
+    } else {
+      // Enviar una representación JSON del artículo 
+      res.json(user);
+    }
+  });
+};
+
+
 // Crear un nuevo método controller que renderiza la página signin
 exports.renderSignin = function(req, res, next) {
   // Si el usuario no está conectado renderizar la página signin, en otro caso redireccionar al usuario de vuelta a la página principal de la aplicación

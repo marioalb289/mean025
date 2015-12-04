@@ -1,12 +1,3 @@
-.main {
-    /*background-color: #f2f2f2;*/
-    border: 1px solid #ccc;
-    padding: 20px;
-    top: 20px;
-    -webkit-box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.2);
-    box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.2);
-    margin-top: 50px;
-}
 
 .navbar{
 	position: relative;
@@ -46,5 +37,55 @@
   font-size: 14px;
   opacity: 0.54; }
 
-  /**/
+  /*date picker*/
+
+  .inputdemoBasicUsage md-datepicker {
+    margin-top: 18px; }
+  .inputdemoBasicUsage .md-datepicker-button {
+    height: 36px;
+    width: 36px;
+    line-height: 36px; }
+  .inputdemoBasicUsage .md-datepicker-input-container {
+    margin-left: 2px; }
+
+  .md-datepicker-calendar-pane {
+    z-index:9999;
+    }
+
+  .md-datepicker-calendar, .md-datepicker-input-mask-opaque{
+     background: rgb(255,255,255);
+  }
+
+  .md-calendar-date.md-calendar-selected-date .md-calendar-date-selection-indicator, .md-calendar-date.md-focus.md-calendar-selected-date .md-calendar-date-selection-indicator{
+     background: rgb(33,150,243);
+     color: rgb(255,255,255);
+     border-color: transparent;
+  }
+
+  .md-calendar-date-selection-indicator:hover{
+     background: rgb(224,224,224);
+  }
+
+  .md-calendar-day-header{
+     background: rgb(224,224,224);
+     color: rgba(0,0,0,0.87);
+  }
+  /* */
+
+  /*show dialog angular material*/
+  .dialogdemoBasicUsage #popupContainer {
+    position: relative; }
+  .dialogdemoBasicUsage .debt-be-gone {
+    font-weight: bold;
+    color: blue;
+    text-decoration: underline; }
+  .dialogdemoBasicUsage .footer {
+    width: 100%;
+    text-align: center;
+    margin-left: 20px; }
+  .dialogdemoBasicUsage .footer, .dialogdemoBasicUsage .footer > code {
+    font-size: 0.8em;
+    margin-top: 50px; }
+
+  /***************/
 

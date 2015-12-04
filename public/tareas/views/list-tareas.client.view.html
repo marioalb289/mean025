@@ -3,7 +3,7 @@
         <md-button class="md-raised md-button md-ink-ripple" type="button" ng-transclude="" href="/#!/tareas/create">Nueva Tarea</md-button>
         <!-- <div class="label">Raised</div> -->
       </section>
-    <table class="table table-striped table-hover">
+    <table class="table table-hover">
       <thead>
         <tr>
           <th></th>
@@ -27,21 +27,6 @@
           <td><a href="/#!/tareas/{{tarea._id}}/edit" class="glyphicon glyphicon-pencil edit-list"></a> <a ng-click="delete(tarea,$event)" class="glyphicon glyphicon-remove edit-list"></a></td>
         </tr>
             
-        <!-- <tr>
-          <td>John</td>
-          <td>Doe</td>
-          <td>john@example.com</td>
-        </tr>
-        <tr>
-          <td>Mary</td>
-          <td>Moe</td>
-          <td>mary@example.com</td>
-        </tr>
-        <tr>
-          <td>July</td>
-          <td>Dooley</td>
-          <td>july@example.com</td>
-        </tr> -->
       </tbody>
     </table>
 </div>
