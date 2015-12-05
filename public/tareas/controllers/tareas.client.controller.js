@@ -2,16 +2,86 @@
 'use strict';
 
 // Crear el controller 'tareas'
-angular.module('tareas').controller('TareasController', ['$scope','$filter', '$routeParams', '$location','$mdDialog', 'Authentication', 'Api',
-    function($scope,$filter, $routeParams, $location,$mdDialog, Authentication,Api) {
+angular.module('tareas').controller('TareasController', ['$scope','$filter', '$routeParams', '$location','$mdDialog', 'Authentication', 'Api','$timeout', '$q','$http',
+    function($scope,$filter, $routeParams, $location,$mdDialog, Authentication,Api,$timeout,$q,$http) {
         // Exponer el service Authentication
         $scope.authentication = Authentication;
         $scope.myDate = new Date();
         $scope.users = null;
 
-        $scope.states = ('En Espera,En proceso,En Pausa,Terminada,Cancelada').split(',').map(function(state) {
-            return {abbrev: state};
+        var comun = {};
+
+        comun.usuarios = [];
+
+        $scope.states = ('En Espera,En proceso,En Pausa,Terminada,Cancelada').split(',').map(function(seleccion) {
+            return {abbrev: seleccion};
           });
+
+        var self = this;
+        self.querySearch = querySearch;
+        self.allContacts = loadContacts();
+        self.contacts = [self.allContacts[0]];
+        self.filterSelected = true;
+        self.prueba;
+        console.log(comun);
+
+
+        function prueba(){
+          return $http.get('/api/users')
+          .success(function(data){
+              console.log(data);
+              angular.copy(data, comun.usuarios)
+
+              return comun.usuarios
+          })  
+        }
+
+        /**
+         * Search for contacts.
+         */
+        function querySearch (query) {
+          var results = query ?
+              self.allContacts.filter(createFilterFor(query)) : [];
+          return results;
+        }
+
+        /**
+         * Create filter function for a query string
+         */
+        function createFilterFor(query) {
+          var lowercaseQuery = angular.lowercase(query);
+
+          return function filterFn(contact) {
+            return (contact._lowername.indexOf(lowercaseQuery) != -1);;
+          };
+
+        }
+
+        function loadContacts() {
+          var contacts = [
+            'Marina Augustine',
+            'Oddr Sarno',
+            'Nick Giannopoulos',
+            'Narayana Garner',
+            'Anita Gros',
+            'Megan Smith',
+            'Tsvetko Metzger',
+            'Hector Simek',
+            'Some-guy withalongalastaname'
+          ];
+
+          return contacts.map(function (c, index) {
+            // console.log(c)
+            var cParts = c.split(' ');
+            var contact = {
+              name: c,
+              email: cParts[0][0].toLowerCase() + '.' + cParts[1].toLowerCase() + '@example.com',
+              image: 'http://lorempixel.com/50/50/people?' + index
+            };
+            contact._lowername = contact.name.toLowerCase();
+            return contact;
+          });
+        }
 
         $scope.loadUsers = function() {
             $scope.users = Api.Users.query();
@@ -21,7 +91,7 @@ angular.module('tareas').controller('TareasController', ['$scope','$filter', '$r
         // Crear un nuevo método controller para crear nuevos articles
         $scope.create = function() {
             // Usar los campos form para crear un nuevo objeto $resource tarea
-            console.log(this.tarea.titulo);
+            console.log(this.user._id);
             var tarea = new Api.Tareas({
                 titulo: this.tarea.titulo,
                 descripcion: this.tarea.descripcion,

@@ -12,7 +12,7 @@ angular.module('tareas').factory('Api', ['$resource', function($resource) {
 				            method: 'PUT'
 				        }
 				}),
-	    Users: $resource('api/tareas/:tareaId', {
+	    Users: $resource('api/users/:userId', {
 			        	tareaId: '@_id'
 			    	}, {
 				        update: {
