@@ -9,33 +9,30 @@ angular.module('tareas').controller('TareasController', ['$scope','$filter', '$r
         $scope.myDate = new Date();
         $scope.users = null;
 
-        var comun = {};
-
-        comun.usuarios = [];
-
         $scope.states = ('En Espera,En proceso,En Pausa,Terminada,Cancelada').split(',').map(function(seleccion) {
             return {abbrev: seleccion};
           });
 
+        
+        var x = null;
+        Api.getAll().then(function(data) {
+            prueba(data);
+            $scope.elementos = data;
+        });
+
         var self = this;
-        self.querySearch = querySearch;
-        self.allContacts = loadContacts();
-        self.contacts = [self.allContacts[0]];
-        self.filterSelected = true;
-        self.prueba;
-        console.log(comun);
+        function prueba(data){
+          x = data;
+          // console.log(data);
 
-
-        function prueba(){
-          return $http.get('/api/users')
-          .success(function(data){
-              console.log(data);
-              angular.copy(data, comun.usuarios)
-
-              return comun.usuarios
-          })  
+          
+          self.querySearch = querySearch;
+          self.allContacts = loadContacts(data);
+          self.contacts = [self.allContacts[0]];
+          self.filterSelected = true;
         }
 
+        
         /**
          * Search for contacts.
          */
@@ -57,24 +54,24 @@ angular.module('tareas').controller('TareasController', ['$scope','$filter', '$r
 
         }
 
-        function loadContacts() {
-          var contacts = [
-            'Marina Augustine',
-            'Oddr Sarno',
-            'Nick Giannopoulos',
-            'Narayana Garner',
-            'Anita Gros',
-            'Megan Smith',
-            'Tsvetko Metzger',
-            'Hector Simek',
-            'Some-guy withalongalastaname'
-          ];
-
+        function loadContacts(data) {
+          var contacts = [];
+          for (var i = 0; i < data.length; i++) {
+            contacts.push(data[i].fullName+' '+data[i]._id)
+          };
           return contacts.map(function (c, index) {
             // console.log(c)
             var cParts = c.split(' ');
+            var nombre = '';
+            for (var i = 0; i < cParts.length; i++) {
+              if(i == cParts.length-1){
+                break;
+              }
+              nombre= nombre +' ' + cParts[i];
+            };
             var contact = {
-              name: c,
+              id: cParts[cParts.length-1],
+              name: nombre,
               email: cParts[0][0].toLowerCase() + '.' + cParts[1].toLowerCase() + '@example.com',
               image: 'http://lorempixel.com/50/50/people?' + index
             };
@@ -84,23 +81,25 @@ angular.module('tareas').controller('TareasController', ['$scope','$filter', '$r
         }
 
         $scope.loadUsers = function() {
-            $scope.users = Api.Users.query();
-            console.log($scope.users);
+            // $scope.users = Api.Users.query();
+            // console.log($scope.users);
         };
 
         // Crear un nuevo método controller para crear nuevos articles
         $scope.create = function() {
             // Usar los campos form para crear un nuevo objeto $resource tarea
-            console.log(this.user._id);
+            // console.log(this.ctrl.contacts);
             var tarea = new Api.Tareas({
                 titulo: this.tarea.titulo,
                 descripcion: this.tarea.descripcion,
                 terminadoCompromiso: this.tarea.terminadoCompromiso,
-                status: this.tarea.status
+                status: this.tarea.status,
+                usuariosAdd:this.ctrl.contacts
 
-            });
 
-            console.log(this.tarea);
+            },this.ctrl.contacts);
+
+            // console.log(this.tarea);
 
             // Usar el método '$save' de tarea para enviar una petición POST apropiada
             tarea.$save(function(response) {
@@ -117,7 +116,7 @@ angular.module('tareas').controller('TareasController', ['$scope','$filter', '$r
         $scope.find = function() {
             // Usar el método 'query' de tarea para enviar una petición GET apropiada
             $scope.tareas = Api.Tareas.query();
-            console.log($scope.tareas);
+            // console.log($scope.tareas);
         };
 
          // Crear un nuevo método controller para recuperar una unica Tarea
@@ -132,7 +131,7 @@ angular.module('tareas').controller('TareasController', ['$scope','$filter', '$r
             });
             var x = $scope.tarea; 
             // $scope.myNewDate = $filter('date')($scope.tarea.creado, 'longDate');
-            console.log(x.creado);
+            // console.log(x.creado);
             
         };
 

@@ -3,7 +3,8 @@
 
 // Cargar las dependencias del módulo
 var mongoose = require('mongoose'),
-	Tarea = mongoose.model('Tarea');
+	Tarea = mongoose.model('Tarea'),
+	UserTarea = mongoose.model('UserTarea');
 // Crear un nuevo método controller para el manejo de errores
 var getErrorMessage = function(err) {
 	if (err.errors) {
@@ -32,9 +33,11 @@ exports.list = function(req, res) {
 
 // Crear un nuevo método controller para crear nuevos TAREAS
 exports.create = function(req, res) {
+	// console.log(req.body.usuariosAdd);
+	var usuariosTarea = req.body.usuariosAdd;
 	// Crear un nuevo objeto artículo
 	var tarea = new Tarea(req.body);
-	console.log(tarea);
+	// console.log(tarea._id);
 
 	// Configurar la propiedad 'creador' de la tarea
 	tarea.creador = req.user;
@@ -48,9 +51,27 @@ exports.create = function(req, res) {
 			});
 		} else {
 			// Enviar una representación JSON de la tarea 
+			console.log(tarea);
+			console.log(usuariosTarea);
+			for (var i = 0; i < usuariosTarea.length ; i++) {
+				var user_tarea = new UserTarea();
+				user_tarea.id_Tarea = tarea._id;
+				user_tarea.id_Usuario = usuariosTarea[i].id;
+				user_tarea.save(function(err){
+					if (err) {
+						// Si ocurre algún error enviar el mensaje de error
+						return res.status(400).send({
+							message: getErrorMessage(err)
+						});
+					}
+				});
+
+			};
+
 			res.json(tarea);
 		}
 	});
+	
 };
 
 // Crear un nuevo método controller que devuelve una tarea existente

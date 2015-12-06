@@ -16,9 +16,12 @@ module.exports = function() {
     // Cargar el modelo 'Article'
 	require('../app/models/article.server.model');
 
+	//cargar el modelo 'tarea'
 	require('../app/models/tarea.server.model');
+
+	//car el modelo 'user_tarea'
+	require('../app/models/user_tarea.server.model');
 	// require('../app/models/tarea_desc.server.model');
-	// require('../app/models/user_tarea.server.model');
 
 
 	// Devolver la instancia de conexión a Mongoose
