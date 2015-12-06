@@ -18,6 +18,11 @@ var TareaSchema = new Schema({
     default: '',
     trim: true,
   },
+  users_ids: {
+    type: String,
+    default: '',
+    trim: true,
+  },
   terminado: {
     type: Date,
   },

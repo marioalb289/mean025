@@ -26,7 +26,7 @@ angular.module('tareas').controller('TareasController', ['$scope','$filter', '$r
         function initChip(data){
           self.querySearch = querySearch;
           self.allContacts = loadContacts(data);
-          console.log(self.allContacts);
+          // console.log(self.allContacts);
           self.contacts = [];
           self.filterSelected = true;
         }
@@ -125,13 +125,23 @@ angular.module('tareas').controller('TareasController', ['$scope','$filter', '$r
             $scope.tarea = Api.Tareas.get({
                 tareaId: $routeParams.tareaId
             },function(_data){
-              // console.log(_data._id);
-              // console.log(self.allContacts[0]);
+              // console.log(_data);
+              var userParts = _data.users_ids.split(',');
+              console.log(userParts);
+              console.log(self.allContacts);
+              var arrUser = [];
+              for (var i = 0; i < userParts.length; i++) {
+                for (var z = 0; z < self.allContacts.length; z++) {
+                  if(userParts[i] == self.allContacts[z].id){
+                    arrUser.push(self.allContacts[z]);
+                  }
+                };
+              };
               // var arrUser = [];
               // for (var i = 0; i < 2; i++) {
               //   arrUser.push(self.allContacts[i]);
               // };
-              // self.contacts = arrUser;
+              self.contacts = arrUser;
                  _data.creado = new Date(_data.creado);
                  _data.terminadoCompromiso = new Date(_data.terminadoCompromiso);
                  // self.contacts = [self.allContacts[0],self.allContacts[1]];
@@ -145,7 +155,8 @@ angular.module('tareas').controller('TareasController', ['$scope','$filter', '$r
          // Crear un nuevo método controller para actualizar una unica tarea
         $scope.update = function() {
             // Usar el método '$update' de article para enviar una petición PUT apropiada
-            $scope.tarea.$update(function() {
+            $scope.tarea.usuariosAdd = this.ctrl.contacts;
+            $scope.tarea.$update('aqui',function() {
                 // Si un article fue actualizado de modo correcto, redirigir el user a la página del article 
                 $location.path('tareas/list');
             }, function(errorResponse) {

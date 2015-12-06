@@ -41,6 +41,17 @@ exports.create = function(req, res) {
 
 	// Configurar la propiedad 'creador' de la tarea
 	tarea.creador = req.user;
+	//Configurar la lista de usuarios en esta tarea
+	var user_ids = '';
+	for (var i = 0; i < usuariosTarea.length ; i++) {
+		if(i == usuariosTarea.length-1){
+			user_ids += usuariosTarea[i].id;
+		}else{
+			user_ids += usuariosTarea[i].id+ ',';			
+		}
+	};
+	tarea.users_ids = user_ids;
+
 
 	// Intentar salvar el artículo
 	tarea.save(function(err) {
@@ -53,20 +64,7 @@ exports.create = function(req, res) {
 			// Enviar una representación JSON de la tarea 
 			// console.log(tarea);
 			// console.log(usuariosTarea);
-			for (var i = 0; i < usuariosTarea.length ; i++) {
-				var user_tarea = new UserTarea();
-				user_tarea.id_Tarea = tarea._id;
-				user_tarea.id_Usuario = usuariosTarea[i].id;
-				user_tarea.save(function(err){
-					if (err) {
-						// Si ocurre algún error enviar el mensaje de error
-						return res.status(400).send({
-							message: getErrorMessage(err)
-						});
-					}
-				});
-
-			};
+			
 
 			res.json(tarea);
 		}
@@ -83,7 +81,7 @@ exports.read = function(req, res) {
 exports.update = function(req, res) {
 	// Obtener la tarea usando el objeto 'request'
 	var tarea = req.tarea;
-
+	// console.log(req.body);return;
 	// Actualizar los campos tarea
 	tarea.titulo = req.body.titulo;
 	tarea.descripcion = req.body.descripcion;
@@ -92,6 +90,18 @@ exports.update = function(req, res) {
 		tarea.terminado = new Date();
 	}
 	tarea.terminadoCompromiso = req.body.terminadoCompromiso;
+
+	//Configurar la lista de usuarios en esta tarea
+	var usuariosTarea = req.body.usuariosAdd;
+	var user_ids = '';
+	for (var i = 0; i < usuariosTarea.length ; i++) {
+		if(i == usuariosTarea.length-1){
+			user_ids += usuariosTarea[i].id;
+		}else{
+			user_ids += usuariosTarea[i].id+ ',';			
+		}
+	};
+	tarea.users_ids = user_ids;
 
 	// Intentar salvar la tarea actualizada
 	tarea.save(function(err) {
