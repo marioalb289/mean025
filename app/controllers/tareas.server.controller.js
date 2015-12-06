@@ -51,8 +51,8 @@ exports.create = function(req, res) {
 			});
 		} else {
 			// Enviar una representación JSON de la tarea 
-			console.log(tarea);
-			console.log(usuariosTarea);
+			// console.log(tarea);
+			// console.log(usuariosTarea);
 			for (var i = 0; i < usuariosTarea.length ; i++) {
 				var user_tarea = new UserTarea();
 				user_tarea.id_Tarea = tarea._id;

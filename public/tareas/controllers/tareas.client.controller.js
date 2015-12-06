@@ -16,19 +16,18 @@ angular.module('tareas').controller('TareasController', ['$scope','$filter', '$r
         
         var x = null;
         Api.getAll().then(function(data) {
-            prueba(data);
+            initChip(data);
             $scope.elementos = data;
         });
 
         var self = this;
-        function prueba(data){
-          x = data;
-          // console.log(data);
 
-          
+        //cargar usuarios al arreglo de chips
+        function initChip(data){
           self.querySearch = querySearch;
           self.allContacts = loadContacts(data);
-          self.contacts = [self.allContacts[0]];
+          console.log(self.allContacts);
+          self.contacts = [];
           self.filterSelected = true;
         }
 
@@ -126,8 +125,16 @@ angular.module('tareas').controller('TareasController', ['$scope','$filter', '$r
             $scope.tarea = Api.Tareas.get({
                 tareaId: $routeParams.tareaId
             },function(_data){
+              // console.log(_data._id);
+              // console.log(self.allContacts[0]);
+              // var arrUser = [];
+              // for (var i = 0; i < 2; i++) {
+              //   arrUser.push(self.allContacts[i]);
+              // };
+              // self.contacts = arrUser;
                  _data.creado = new Date(_data.creado);
                  _data.terminadoCompromiso = new Date(_data.terminadoCompromiso);
+                 // self.contacts = [self.allContacts[0],self.allContacts[1]];
             });
             var x = $scope.tarea; 
             // $scope.myNewDate = $filter('date')($scope.tarea.creado, 'longDate');
