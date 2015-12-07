@@ -2,8 +2,8 @@
 'use strict';
 
 // Crear el controller 'tareas'
-angular.module('tareas').controller('TareasController', ['$scope','$filter', '$routeParams', '$location','$mdDialog', 'Authentication', 'Api','$timeout', '$q','$http',
-    function($scope,$filter, $routeParams, $location,$mdDialog, Authentication,Api,$timeout,$q,$http) {
+angular.module('tareas').controller('TareasController', ['$scope','$filter', '$routeParams', '$location','$mdDialog', 'Authentication', 'Api','$timeout', '$q','$http','$mdToast',
+    function($scope,$filter, $routeParams, $location,$mdDialog, Authentication,Api,$timeout,$q,$http,$mdToast) {
         // Exponer el service Authentication
         $scope.authentication = Authentication;
         $scope.myDate = new Date();
@@ -30,6 +30,8 @@ angular.module('tareas').controller('TareasController', ['$scope','$filter', '$r
           self.contacts = [];
           self.filterSelected = true;
         }
+
+
 
         
         /**
@@ -105,6 +107,7 @@ angular.module('tareas').controller('TareasController', ['$scope','$filter', '$r
                 // Si un artículo fue creado de modo correcto, redireccionar al usuario a la página del artículo 
                 // $location.path('tareas/' + response._id);
                 $location.path('tareas/list');
+
             }, function(errorResponse) {
                 // En otro caso, presentar al usuario el mensaje de error
                 $scope.error = errorResponse.data.message;
