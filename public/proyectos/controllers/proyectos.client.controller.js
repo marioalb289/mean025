@@ -120,31 +120,13 @@ angular.module('proyectos').controller('ProyectosController', ['$scope','$filter
         $scope.findOne = function() {
             // Usar el método 'get' de tarea para enviar una petición GET apropiada
             // $state.go('editar');
-            $scope.tarea = Api.Tareas.get({
-                tareaId: $routeParams.tareaId
+            $scope.proyecto = ApiProyectos.Proyectos.get({
+                proyectoId: $routeParams.proyectoId
             },function(_data){
-              // console.log(_data);
-              var userParts = _data.users_ids.split(',');
-              console.log(userParts);
-              console.log(self.allContacts);
-              var arrUser = [];
-              for (var i = 0; i < userParts.length; i++) {
-                for (var z = 0; z < self.allContacts.length; z++) {
-                  if(userParts[i] == self.allContacts[z].id){
-                    arrUser.push(self.allContacts[z]);
-                  }
-                };
-              };
-              // var arrUser = [];
-              // for (var i = 0; i < 2; i++) {
-              //   arrUser.push(self.allContacts[i]);
-              // };
-              self.contacts = arrUser;
                  _data.creado = new Date(_data.creado);
-                 _data.terminadoCompromiso = new Date(_data.terminadoCompromiso);
                  // self.contacts = [self.allContacts[0],self.allContacts[1]];
             });
-            var x = $scope.tarea; 
+            // var x = $scope.tarea; 
             // $scope.myNewDate = $filter('date')($scope.tarea.creado, 'longDate');
             // console.log(x.creado);
             
@@ -153,10 +135,9 @@ angular.module('proyectos').controller('ProyectosController', ['$scope','$filter
          // Crear un nuevo método controller para actualizar una unica tarea
         $scope.update = function() {
             // Usar el método '$update' de article para enviar una petición PUT apropiada
-            $scope.tarea.usuariosAdd = this.ctrl.contacts;
-            $scope.tarea.$update('aqui',function() {
+            $scope.proyecto.$update(function() {
                 // Si un article fue actualizado de modo correcto, redirigir el user a la página del article 
-                $location.path('tareas/list');
+                $location.path('proyectos/list');
             }, function(errorResponse) {
                 // En otro caso, presenta al user un mensaje de error
                 $scope.error = errorResponse.data.message;
@@ -164,12 +145,12 @@ angular.module('proyectos').controller('ProyectosController', ['$scope','$filter
         };
 
         // Crear un nuevo método controller para borrar una unica tarea
-        $scope.delete = function(tarea,ev) {
+        $scope.delete = function(proyecto,ev) {
 
             // Appending dialog to document.body to cover sidenav in docs app
             var confirm = $mdDialog.confirm()
-                  .title('¿ Eliminar Tarea ?')
-                  .content('Se eliminaran todos los datos relacionados a la tarea')
+                  .title('¿ Eliminar Proyectos ?')
+                  .content('Se eliminaran todos los datos relacionados a la Proyecto incluida sus tareas')
                   .ariaLabel('Lucky day')
                   .targetEvent(ev)
                   .ok('Eliminar')
@@ -178,19 +159,19 @@ angular.module('proyectos').controller('ProyectosController', ['$scope','$filter
             $mdDialog.show(confirm).then(function() {
                 //ok
                 // Si una tarea fue enviado al método, borrarlo
-                if (tarea) {
+                if (proyecto) {
                     // Usar el método '$remove' del tarea para borrar la tarea
-                    tarea.$remove(function() {
+                    proyecto.$remove(function() {
                         // Eliminar el artículo de la lista de artículos
-                        for (var i in $scope.tareas) {
-                            if ($scope.tareas[i] === tarea) {
-                                $scope.tareas.splice(i, 1);
+                        for (var i in $scope.proyectos) {
+                            if ($scope.proyectos[i] === proyecto) {
+                                $scope.proyectos.splice(i, 1);
                             }
                         }
                     });
                 } else {
                     // En otro caso, usar el método '$remove' de tarea para borrar la tarea
-                    $scope.tarea.$remove(function() {
+                    $scope.proyecto.$remove(function() {
                         // $location.path('tareas/list');
                     });
                 }

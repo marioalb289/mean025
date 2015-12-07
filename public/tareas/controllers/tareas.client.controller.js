@@ -61,8 +61,8 @@ angular.module('tareas').controller('TareasController', ['$scope','$filter', '$r
             contacts.push(data[i].fullName+' '+data[i]._id)
           };
           return contacts.map(function (c, index) {
-            // console.log(c)
             var cParts = c.split(' ');
+            console.log(cParts);
             var nombre = '';
             for (var i = 0; i < cParts.length; i++) {
               if(i == cParts.length-1){
@@ -70,6 +70,7 @@ angular.module('tareas').controller('TareasController', ['$scope','$filter', '$r
               }
               nombre= nombre +' ' + cParts[i];
             };
+            console.log(nombre);
             var contact = {
               id: cParts[cParts.length-1],
               name: nombre,

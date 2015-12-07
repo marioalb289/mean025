@@ -93,7 +93,7 @@ exports.proyectoByID = function(req, res, next, id) {
 	// Usar el método model 'findById' para encontrar una única tarea
 	Proyecto.findById(id).populate('creador', 'firstName lastName fullName').exec(function(err, proyecto) {
 		if (err) return next(err);
-		if (!tarea) return next(new Error('Fallo al cargar el proyecto ' + id));
+		if (!proyecto) return next(new Error('Fallo al cargar el proyecto ' + id));
 
 		// Si una tarea es encontrado usar el objeto 'request' para pasarlo al siguietne middleware
 		req.proyecto = proyecto;
