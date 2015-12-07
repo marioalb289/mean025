@@ -2,9 +2,13 @@
 <html>
 <head>
   <!-- Usar la propiedad 'title' para renderizar un título de página  -->
-  <title>
-    <%=title %>
-  </title>
+  <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="/example/styles/styles.css">
+    <link rel="stylesheet" type="text/css" href="/lib/angular-material/angular-material.css">
+    <script type="text/javascript" src="/lib/jquery/dist/jquery.min.js"></script>
+  <title><%= title %></title>
+
 </head>
 <body>
   <!-- Mostrar mensajes flash  -->
@@ -38,5 +42,29 @@
     </div>
   </form>
   <a href="/oauth/google">Registrarse usando Google</a>
+    <script type="text/javascript" src="/lib/angular/angular.min.js"></script>
+    <!-- <script type="text/javascript" src="/lib/angular-ui-router/release/angular-ui-router.min.js"></script> -->
+    <script type="text/javascript" src="/lib/angular-route/angular-route.min.js"></script>
+    <script type="text/javascript" src="/lib/angular-resource/angular-resource.min.js"></script>
+    <script type="text/javascript" src="/lib/angular-animate/angular-animate.min.js"></script>
+    <script type="text/javascript" src="/lib/angular-aria/angular-aria.min.js"></script>
+    <script type="text/javascript" src="/lib/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="/lib/angular-material/angular-material.min.js"></script>
+    <script type="text/javascript" src="/lib/angular-messages/angular-messages.min.js"></script>
+    <script type="text/javascript" src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/articles/articles.client.module.js"></script>
+    <script type="text/javascript" src="/articles/controllers/articles.client.controller.js"></script>
+    <script type="text/javascript" src="/articles/services/articles.client.service.js"></script>
+    <script type="text/javascript" src="/articles/config/articles.client.routes.js"></script> 
+    <script type="text/javascript" src="/example/example.client.module.js"></script>
+    <script type="text/javascript" src="/example/controllers/example.client.controller.js"></script>
+    <script type="text/javascript" src="/example/config/example.client.routes.js"></script>
+    <script type="text/javascript" src="/users/users.client.module.js"></script>
+    <script type="text/javascript" src="/users/services/authentication.client.service.js"></script>
+    <script type="text/javascript" src="/application.js"></script>
+    <script type="text/javascript" src="/tareas/tareas.client.module.js"></script>
+    <script type="text/javascript" src="/tareas/controllers/tareas.client.controller.js"></script>
+    <script type="text/javascript" src="/tareas/services/tareas.client.service.js"></script>
+    <script type="text/javascript" src="/tareas/config/tareas.client.routes.js"></script>
 </body>
 </html>

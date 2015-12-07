@@ -24,7 +24,7 @@
 	                <a href="/#!/tareas/list">Tareas</a>
 	            </li>
 	            <li>
-	                <a href="#">Shortcuts</a>
+	                <a href="/#!/proyectos/list">Proyectos</a>
 	            </li>
 	            <li>
 	                <a href="#">Overview</a>
@@ -58,6 +58,7 @@
             <span flex=""></span>
             <md-button class="md-icon-button" aria-label="Favorite">
               <md-icon md-svg-icon="/lib/angular-material/demos/toolbar/demoBasicUsage/img/icons/user91.svg" ></md-icon>
+              <%= userFullName %>
             </md-button>
             <md-button class="md-icon-button" href="/signout" aria-label="More">
               <md-icon md-svg-icon="/lib/angular-material/demos/toolbar/demoBasicUsage/img/icons/power107.svg"  ></md-icon>
@@ -115,6 +116,11 @@
 	<script type="text/javascript" src="/tareas/tareas.client.module.js"></script>
 	<script type="text/javascript" src="/tareas/controllers/tareas.client.controller.js"></script>
     <script type="text/javascript" src="/tareas/services/tareas.client.service.js"></script>
-    <script type="text/javascript" src="/tareas/config/tareas.client.routes.js"></script>	
+    <script type="text/javascript" src="/tareas/config/tareas.client.routes.js"></script>
+    <!-- proyectos script  -->
+    <script type="text/javascript" src="/proyectos/proyectos.client.module.js"></script>
+	<script type="text/javascript" src="/proyectos/controllers/proyectos.client.controller.js"></script>
+    <script type="text/javascript" src="/proyectos/services/proyectos.client.service.js"></script>
+    <script type="text/javascript" src="/proyectos/config/proyectos.client.routes.js"></script>
 </body>
 </html>

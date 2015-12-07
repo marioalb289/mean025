@@ -1,0 +1,32 @@
+
+<div ng-controller="ProyectosController as ctrl" ng-app="proyectos" class="md-inline-form inputdemoBasicUsage col-xs-12 col-md-12" layout="column" ng-cloak="" class="md-inline-form">
+    <h1>Aregar Proyecto</h1>
+    <md-content layout-padding="">
+      <form name="proyocetoAddForm" ng-submit="create()">
+
+        <div layout="" layout-sm="column">
+          <md-input-container flex="">
+            <label>Título</label>
+            <input md-maxlength="30" required name="description" ng-model="proyecto.titulo">
+            <div ng-messages="projectForm.description.$error">
+              <div ng-message="required">Titulo Obligatorio</div>
+              <div ng-message="md-maxlength">Titulo debe ser menor de 30 caracteres</div>
+            </div>
+          </md-input-container>
+          <md-datepicker ng-model="myDate" md-placeholder=""  disabled></md-datepicker>
+        </div>
+
+        <md-input-container class="md-block">
+          <label>Descripcion</label>
+          <input ng-model="proyecto.descripcion">
+        </md-input-container>
+
+        <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+          <md-button class="md-raised md-primary" ng-disabled="userForm.$invalid">Guardar</md-button>
+          <!-- <div class="label">Raised</div> -->
+        </section>
+
+
+      </form>
+    </md-content>
+</div>

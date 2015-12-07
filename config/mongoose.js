@@ -21,6 +21,9 @@ module.exports = function() {
 
 	//car el modelo 'user_tarea'
 	require('../app/models/user_tarea.server.model');
+
+	//cargar el modelo proyecto
+	require('../app/models/proyecto.server.model');
 	// require('../app/models/tarea_desc.server.model');
 
 

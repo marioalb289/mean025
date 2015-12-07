@@ -36,6 +36,10 @@ var TareaSchema = new Schema({
   },
   creador: {
     type: Schema.ObjectId,
+    ref: 'Proyecto'
+  },
+  creador: {
+    type: Schema.ObjectId,
     ref: 'User'
   }
 });

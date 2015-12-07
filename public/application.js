@@ -1,6 +1,6 @@
 var mainApplicationModuleName = 'mean';
 
-var mainApplicationModule = angular.module(mainApplicationModuleName, ['ngMaterial', 'ngMessages','ngResource','ngRoute','users','example', 'articles','tareas']).controller('DemoCtrl', function() {
+var mainApplicationModule = angular.module(mainApplicationModuleName, ['ngMaterial', 'ngMessages','ngResource','ngRoute','users','example', 'articles','tareas','proyectos']).controller('DemoCtrl', function() {
   
     });
 

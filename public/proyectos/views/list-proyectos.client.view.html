@@ -1,0 +1,24 @@
+<div ng-controller="ProyectosController" data-ng-init="find()" class="container main col-xs-12 col-md-12" >
+    <section layout="row" layout-sm="column" layout-align="right" layout-wrap>
+        <md-button class="md-raised md-button md-ink-ripple" type="button" ng-transclude="" href="/#!/proyectos/create">Nuevo Proyecto</md-button>
+        <!-- <div class="label">Raised</div> -->
+      </section>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Proyecto</th>
+          <th>Creado por:</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr data-ng-repeat="proyecto in proyectos" >
+          <td >{{$index + 1}}</td>
+          <td>{{proyecto.titulo}}</td>
+          <td>{{proyecto.creador.fullName}}</td>
+          <td><a href="/#!/proyectos/{{proyecto._id}}/edit" class="glyphicon glyphicon-pencil edit-list"></a> <a ng-click="delete(proyecto,$event)" class="glyphicon glyphicon-remove edit-list"></a></td>
+        </tr>
+            
+      </tbody>
+    </table>
+</div>
