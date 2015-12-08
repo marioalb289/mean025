@@ -1,0 +1,24 @@
+<div ng-controller="UsersController" data-ng-init="find()" class="container main col-xs-12 col-md-12" >
+    <section layout="row" layout-sm="column" layout-align="right" layout-wrap>
+        <md-button class="md-raised md-button md-ink-ripple" type="button" ng-transclude="" href="/#!/users/create">Nuevo Usuario</md-button>
+        <!-- <div class="label">Raised</div> -->
+      </section>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Usuario</th>
+          <th>Creado por:</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr data-ng-repeat="user in users" >
+          <td >{{$index + 1}}</td>
+          <td>{{user.titulo}}</td>
+          <td>{{user.creador.fullName}}</td>
+          <td><a href="/#!/users/{{user._id}}/edit" class="glyphicon glyphicon-pencil edit-list"></a> <a ng-click="delete(user,$event)" class="glyphicon glyphicon-remove edit-list"></a></td>
+        </tr>
+            
+      </tbody>
+    </table>
+</div>
